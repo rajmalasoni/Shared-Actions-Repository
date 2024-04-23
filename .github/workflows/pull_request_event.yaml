@@ -1,8 +1,12 @@
 name: PR Description, Target Checker, Version, and Close the PR having DO NOT MERGE LABEL
 
+# Add the on.workflow_call trigger to make the workflow reusable
 on:
-  pull_request:
-    types: [opened, edited, reopened, labeled]
+  workflow_call:
+    inputs:
+      action:
+        required: true
+        type: string
 
 permissions: write-all
 
@@ -32,19 +36,9 @@ jobs:
             echo "no file"
           fi
 
-      # Add the on.workflow_call trigger to make the workflow reusable
-      - name: Trigger on workflow call
-        id: trigger
-        uses: actions/github-script@v5
-        with:
-          script: |
-            console.log('Workflow triggered by workflow call event.');
-
       # Accept input parameters if needed
       - name: Set input parameters
         if: ${{ github.event_name == 'workflow_call' }}
         run: |
           echo "Input parameters received:"
           echo "Action: ${{ github.event.inputs.action }}"
-
-      # Add your workflow steps here
