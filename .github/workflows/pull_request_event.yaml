@@ -2,6 +2,11 @@ name: PR Description, Target Checker, Version, and Close the PR having DO NOT ME
 
 on:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'The action to perform.'
+        required: true
+        type: string
 
 permissions: write-all
 
