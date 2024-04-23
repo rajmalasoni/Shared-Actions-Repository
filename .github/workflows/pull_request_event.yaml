@@ -2,9 +2,29 @@ name: PR Description, Target Checker, Version, and Close the PR having DO NOT ME
 
 on:
   workflow_dispatch:
-    inputs:
-      action:
-        description: 'The action to perform.'
+     inputs:
+      EVENT_CHECK_VARIABLE:
+        description: 'Description of the event check variable.'
+        required: true
+        type: string
+      GITHUB_TOKEN:
+        description: 'GitHub token for authentication.'
+        required: true
+        type: string
+      REPO_NAME:
+        description: 'Repository name.'
+        required: true
+        type: string
+      PR_NUMBER:
+        description: 'Pull request number.'
+        required: true
+        type: string
+      EVENT:
+        description: 'Description of the event.'
+        required: true
+        type: string
+      WEBHOOK:
+        description: 'Webhook URL.'
         required: true
         type: string
 
