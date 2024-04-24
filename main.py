@@ -99,9 +99,7 @@ try:
                 GCHAT_MESSAGE.append(msg.get("check_description"))
                 
         # 5. Check if the version from "VERSION" file exists as a tag
-        if pr and VERSION_FILE:
-            #if VERSION_FILE =='0':
-
+        if pr and VERSION_FILE!=0:
             tags = repo.get_tags()
             tag_exist = False
             for tag in tags:
