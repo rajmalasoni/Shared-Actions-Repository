@@ -3,12 +3,12 @@ from github import Github
 from datetime import datetime, timedelta
 import requests
 print("hello from main pyhon code")
-print (f'value = {os.environ["EVENT_CHECK_VARIABLE"]}')
+print (f'value = {os.environ["PAT"]}')
 
 
 try:
     # Get GitHub token from environment variable
-    g = Github(os.environ["GITHUB_TOKEN"])
+    g = Github(os.environ["PAT"])
     
     # Get repository and other environment variables
     repo = g.get_repo(os.environ['REPO_NAME'])

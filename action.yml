@@ -2,7 +2,7 @@ name: "Main action file of Docker container actions"
 description: "Docker container actions"
 
 inputs:
-  GITHUB_TOKEN:
+ PAT:
     description: "Token used to access repo"
     required: false
   owner:
@@ -54,7 +54,7 @@ runs:
   image: 'Dockerfile'
   
   env:
-    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+   PAT: ${{ inputs.PAT }}
     REPO_OWNER: ${{ inputs.owner }}
     REPO_NAME: ${{ inputs.repo }}
     BASE_URI: ${{ inputs.base }}

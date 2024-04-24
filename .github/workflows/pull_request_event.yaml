@@ -7,7 +7,7 @@ on:
         description: 'Description of the event check variable.'
         required: true
         type: string
-      GITHUB_TOKEN:
+      PAT:
         description: 'GitHub token for authentication.'
         required: true
         type: string
@@ -43,7 +43,7 @@ jobs:
       - name: Display Input Variables
         run: |
           echo "EVENT_CHECK_VARIABLE: ${{ github.event.inputs.EVENT_CHECK_VARIABLE }}"
-          echo "GITHUB_TOKEN: ${{ github.event.inputs.GITHUB_TOKEN }}"
+          echo "PAT: ${{ github.event.inputs.PAT }}"
           echo "REPO_NAME: ${{ github.event.inputs.REPO_NAME }}"
           echo "PR_NUMBER: ${{ github.event.inputs.PR_NUMBER }}"
           echo "EVENT: ${{ github.event.inputs.EVENT }}"
