@@ -1,20 +1,45 @@
 # Description: This workflow triggers when a comment is made on an issue.
 # It checks for specific slash commands in the comment body to determine whether to merge or close the associated pull request.
 name: 'Merge and close PR using slash-commands'
-on: 
-  issue_comment:
-
+on:
+  workflow_dispatch:
+    inputs:
+      EVENT_CHECK_VARIABLE:
+        description: 'Description of the event check variable.'
+        required: true
+        type: string
+      PAT:
+        description: 'GitHub token for authentication.'
+        required: true
+        type: string
+      REPO_NAME:
+        description: 'Repository name.'
+        required: true
+        type: string
+      PR_NUMBER:
+        description: 'Pull request number.'
+        required: true
+        type: string
+      EVENT:
+        description: 'Description of the event.'
+        required: true
+        type: string
+      WEBHOOK:
+        description: 'Webhook URL.'
+        required: true
+        type: string
+      MERGE_PR:
+        description: ' MERGE_PR.'
+        required: true
+        type: string
+      CLOSE_PR:
+        description: ' CLOSE_PR.'
+        required: true
+        type: string
+      
 permissions: write-all
   
-env:
-  EVENT_CHECK_VARIABLE: 'slash'
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PR_NUMBER: ${{ github.event.issue.number }} 
-  REPO_NAME: ${{ github.repository }}
-  MERGE_PR: ${{ github.event.comment.body == '/Approved' }}
-  CLOSE_PR: ${{ github.event.comment.body == '/Close' }}
-  WEBHOOK: ${{ secrets.GCHAT_WEBHOOK_URL}}
-  EVENT: ${{ github.event.action }} 
+
   
 jobs:
   Merge_and_Close-PR:  
@@ -22,5 +47,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Merge and close PR
+      - name: Display Input Variables
+        run: |
+          echo "EVENT_CHECK_VARIABLE: ${{ github.event.inputs.EVENT_CHECK_VARIABLE }}"
+          echo "PAT: ${{ github.event.inputs.PAT }}"
+          echo "REPO_NAME: ${{ github.event.inputs.REPO_NAME }}"
+          echo "PR_NUMBER: ${{ github.event.inputs.PR_NUMBER }}"
+          echo "EVENT: ${{ github.event.inputs.EVENT }}"
+          echo "WEBHOOK: ${{ github.event.inputs.WEBHOOK }}"
+          echo "MERGE_PR: ${{ github.event.inputs.MERGE_PR }}"
+          echo "CLOSE_PR: ${{ github.event.inputs.CLOSE_PR }}"
+      - name: Execute Custom Action
         uses: ./
+        with:
+          PAT: ${{ github.event.inputs.PAT }}
+          REPO_NAME: ${{ github.event.inputs.REPO_NAME }}
+          PR_NUMBER: ${{ github.event.inputs.PR_NUMBER }}
+          EVENT: ${{ github.event.inputs.EVENT }}
+          WEBHOOK: ${{ github.event.inputs.WEBHOOK }}
+          MERGE_PR: ${{ github.event.inputs.MERGE_PR }}
+          CLOSE_PR: ${{ github.event.inputs.CLOSE_PR }}
+          EVENT_CHECK_VARIABLE: ${{ github.event.inputs.EVENT_CHECK_VARIABLE }}
