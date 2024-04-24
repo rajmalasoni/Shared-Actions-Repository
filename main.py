@@ -24,7 +24,7 @@ try:
     CLOSE_PR = os.environ.get("CLOSE_PR")
     VERSION_FILE = os.environ.get("VERSION_FILE")
     print(f'value of VERSION_FILE={VERSION_FILE}')
-    if  float(VERSION_FILE)==0.0:
+    if  VERSION_FILE=='0.0':
         print("file not present")
     else:
         print("file is  present")
@@ -102,7 +102,7 @@ try:
                 GCHAT_MESSAGE.append(msg.get("check_description"))
                 
         # 5. Check if the version from "VERSION" file exists as a tag
-        if pr and VERSION_FILE!=0:
+        if pr and VERSION_FILE!='0.0':
             tags = repo.get_tags()
             tag_exist = False
             for tag in tags:
