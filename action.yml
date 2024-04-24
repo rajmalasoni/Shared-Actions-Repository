@@ -2,7 +2,7 @@ name: "Main action file of Docker container actions"
 description: "Docker container actions"
 
 inputs:
- PAT:
+  PAT:
     description: "Token used to access repo"
     required: false
   owner:
@@ -49,12 +49,13 @@ inputs:
   EVENT_CHECK_VARIABLE: 
     description: MY Variable
     required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
   
   env:
-   PAT: ${{ inputs.PAT }}
+    PAT: ${{ inputs.PAT }}
     REPO_OWNER: ${{ inputs.owner }}
     REPO_NAME: ${{ inputs.repo }}
     BASE_URI: ${{ inputs.base }}
