@@ -9,9 +9,8 @@ inputs:
     description: owner name
     default: ${{ github.repository_owner }}
     required: false 
-  repo:
+  REPO_NAME:
     description: repository name
-    default: ${{ github.repository }}
     required: false 
   base:
     description: Base URI
@@ -57,7 +56,7 @@ runs:
   env:
     PAT: ${{ inputs.PAT }}
     REPO_OWNER: ${{ inputs.owner }}
-    REPO_NAME: ${{ inputs.repo }}
+    REPO_NAME: ${{ inputs.REPO_NAME }}
     BASE_URI: ${{ inputs.base }}
     HEAD_REF: ${{ inputs.head_ref }}
     BASE_REF: ${{ inputs.base_ref }}
