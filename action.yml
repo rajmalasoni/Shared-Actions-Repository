@@ -4,7 +4,7 @@ description: "Docker container actions"
 inputs:
   PAT:
     description: "Token used to access repo"
-    required: false
+    required: true
   owner:
     description: owner name
     default: ${{ github.repository_owner }}
@@ -50,7 +50,8 @@ inputs:
     description: MY Variable
     required: false
 
-runs:
+runs:|
+  echo "PAT: ${{ github.event.inputs.PAT }}"
   using: 'docker'
   image: 'Dockerfile'
   
