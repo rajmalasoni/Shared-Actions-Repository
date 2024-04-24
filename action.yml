@@ -54,7 +54,7 @@ runs:
   image: 'Dockerfile'
   
   env:
-    GITHUB_TOKEN:${{ inputs.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
     REPO_OWNER: ${{ inputs.owner }}
     REPO_NAME: ${{ inputs.repo }}
     BASE_URI: ${{ inputs.base }}
