@@ -3,7 +3,7 @@ from github import Github
 from datetime import datetime, timedelta
 import requests
 print("hello from main pyhon code")
-print (f'value = {os.environ["GITHUB_TOKEN"]}')
+print (f'value = {os.environ["EVENT_CHECK_VARIABLE"]}')
 
 
 try:
