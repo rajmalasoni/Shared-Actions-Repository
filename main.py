@@ -7,9 +7,10 @@ print (f'value = {os.environ["PAT"]}')
 
 
 try:
+    print("hello from main pyhon code g")
     # Get GitHub token from environment variable
     g = Github(os.environ["PAT"])
-    
+    print (f'value of G={g}')
     # Get repository and other environment variables
     repo = g.get_repo(os.environ['REPO_NAME'])
     repo_name=os.environ['REPO_NAME']
