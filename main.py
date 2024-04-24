@@ -23,10 +23,12 @@ try:
     MERGE_PR = os.environ.get("MERGE_PR")
     CLOSE_PR = os.environ.get("CLOSE_PR")
     VERSION_FILE = os.environ.get("VERSION_FILE")
+    print(f'value of VERSION_FILE={VERSION_FILE}')
+
     EVENT = os.environ['EVENT']
     GCHAT_WEBHOOK_URL = os.environ['WEBHOOK']
     EVENT_CHECK=os.environ['EVENT_CHECK_VARIABLE']
-    print(f'value of repo_name={EVENT_CHECK}')
+    print(f'value of EVENT_CHECK={EVENT_CHECK}')
      
      # Fuction to send the message to GCHAT
     def send_message_to_google_chat(message, webhook_url):
@@ -97,7 +99,9 @@ try:
                 GCHAT_MESSAGE.append(msg.get("check_description"))
                 
         # 5. Check if the version from "VERSION" file exists as a tag
-        if pr and VERSION_FILE:    
+        if pr and VERSION_FILE:
+            #if VERSION_FILE =='0':
+
             tags = repo.get_tags()
             tag_exist = False
             for tag in tags:
