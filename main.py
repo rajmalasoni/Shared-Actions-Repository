@@ -24,7 +24,10 @@ try:
     CLOSE_PR = os.environ.get("CLOSE_PR")
     VERSION_FILE = os.environ.get("VERSION_FILE")
     print(f'value of VERSION_FILE={VERSION_FILE}')
-
+    if  VERSION_FILE!=0:
+        print("file not present")
+    else:
+        print("file is  present")
     EVENT = os.environ['EVENT']
     GCHAT_WEBHOOK_URL = os.environ['WEBHOOK']
     EVENT_CHECK=os.environ['EVENT_CHECK_VARIABLE']
