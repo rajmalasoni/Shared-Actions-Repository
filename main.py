@@ -26,6 +26,7 @@ try:
     EVENT = os.environ['EVENT']
     GCHAT_WEBHOOK_URL = os.environ['WEBHOOK']
     EVENT_CHECK=os.environ['EVENT_CHECK_VARIABLE']
+    print(f'value of repo_name={EVENT_CHECK}')
      
      # Fuction to send the message to GCHAT
     def send_message_to_google_chat(message, webhook_url):
