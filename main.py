@@ -3,6 +3,7 @@ from github import Github
 from datetime import datetime, timedelta
 import requests
 print("hello from main pyhon code")
+print (f"value = {os.environ["GITHUB_TOKEN"]}")
 
 try:
     # Get GitHub token from environment variable
