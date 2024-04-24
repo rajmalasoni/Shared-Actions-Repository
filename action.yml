@@ -50,8 +50,7 @@ inputs:
     description: MY Variable
     required: false
 
-runs:|
-  echo "PAT: ${{ github.event.inputs.PAT }}"
+runs:
   using: 'docker'
   image: 'Dockerfile'
   
