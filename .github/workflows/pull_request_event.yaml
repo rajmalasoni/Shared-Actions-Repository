@@ -51,7 +51,6 @@ jobs:
           echo "EVENT: ${{ github.event.inputs.EVENT }}"
           echo "WEBHOOK: ${{ github.event.inputs.WEBHOOK }}"
           echo "VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}"
-     - name: PR Description ,Target Checker ,Version and Close the PR having DO NOT MERGE LABEL
         uses: ./
         
 
