@@ -58,3 +58,4 @@ jobs:
           EVENT: ${{ github.event.inputs.EVENT }}
           WEBHOOK: ${{ github.event.inputs.WEBHOOK }}
           VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}
+          EVENT_CHECK_VARIABLE: ${{ github.event.inputs.EVENT_CHECK_VARIABLE }}
