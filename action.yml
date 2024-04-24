@@ -69,3 +69,6 @@ runs:
     EVENT: ${{ inputs.event }}
     WEBHOOK: ${{ inputs.webhook }}
     EVENT_CHECK_VARIABLE: ${{ inputs.EVENT_CHECK_VARIABLE }}
+
+    # Add debug output for PAT environment variable
+    DEBUG_PAT: ${{ secrets.PAT }}
