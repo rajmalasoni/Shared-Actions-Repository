@@ -13,7 +13,9 @@ try:
     print (f'value of G={g}')
     # Get repository and other environment variables
     repo = g.get_repo(os.environ['REPO_NAME'])
+    print(f'value of repo={repo}')
     repo_name=os.environ['REPO_NAME']
+    print(f'value of repo_name={repo_name}')
     pulls = repo.get_pulls(state='open')
     GCHAT_MESSAGE=[]
     pr_number = int(os.environ['PR_NUMBER']) if ( os.environ['PR_NUMBER'] ) else None
