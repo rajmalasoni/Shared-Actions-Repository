@@ -1,41 +1,33 @@
 #  Description: This workflow is tigger on close event   to check for stale pull requests and close them after two days of inactivity.
-name: Create Tag on Merge to master
-
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - master
-
+  workflow_dispatch:
+    inputs:
+      PAT:
+        description: 'GitHub token for authentication.'
+        required: true
+        type: string
+      REPO_NAME:
+        description: 'Repository name.'
+        required: true
+        type: string
+      VERSION_FILE:
+        description: 'VERSION_FILE.'
+        required: true
+        type: string
 
 jobs:
   create-tag:
     runs-on: ubuntu-latest
-
-    env:
-      CREATE_TAG: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.base.ref == 'master' }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Git
+      - name: Set up Git and create tag
         run: |
           git config --global user.email "actions@example.com"
           git config --global user.name "GitHub Actions"
-
-      - name: Read version from file
-        id: version
-        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
-      
-      - name: Create tag
-        run: |
-          git tag -a $VERSION -m "Version $VERSION"
-          echo "Created tag: $VERSION"
-        if: ${{ env.CREATE_TAG }}
-      
-      - name: Push tag
-        run: git push origin $VERSION --tags
-        if: ${{ env.CREATE_TAG }}
+          echo "VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}"
+          git tag -a ${{ github.event.inputs.VERSION_FILE }} -m "Version ${{ github.event.inputs.VERSION_FILE }}"
+          git push "https://github.com/${{ github.event.inputs.REPO_NAME }}" ${{ github.event.inputs.VERSION_FILE }} --tags
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          PAT: ${{ github.event.inputs.PAT }}
