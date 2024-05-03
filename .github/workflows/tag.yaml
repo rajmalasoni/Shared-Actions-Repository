@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Clean up existing files
         run: |
-          rm -rf ./*
+           ls -a | grep -vE "^\.$|^\.\.$" | xargs rm -rf
       - name: clone repo
         run: |
           git clone https://github.com/${{ github.event.inputs.REPO_OWNER }}/${{ github.event.inputs.REPO_NAME }} .
