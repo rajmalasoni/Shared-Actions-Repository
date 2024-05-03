@@ -18,6 +18,11 @@ on:
         description: 'VERSION_FILE.'
         required: true
         type: string
+      REPO_NAME:
+        description: 'REPO_NAME.'
+        required: true
+        type: string
+        
         
 jobs:
   create-tag:
@@ -32,6 +37,6 @@ jobs:
           git config --global user.name "GitHub Actions"
           echo "VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}"
           git tag -a ${{ github.event.inputs.VERSION_FILE }} -m "Version ${{ github.event.inputs.VERSION_FILE }}"
-          git push https://${{ github.event.inputs.UserName }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.inputs.Owner }}/repo.git --tags
+          git push https://${{ github.event.inputs.UserName }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.inputs.Owner }}/${{ github.event.inputs.REPO_NAME }}.git --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
