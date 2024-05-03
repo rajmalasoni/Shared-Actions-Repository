@@ -30,4 +30,4 @@ jobs:
           git tag -a ${{ github.event.inputs.VERSION_FILE }} -m "Version ${{ github.event.inputs.VERSION_FILE }}"
           git push "https://github.com/${{ github.event.inputs.REPO_NAME }}" ${{ github.event.inputs.VERSION_FILE }} --tags
         env:
-          PAT: ${{ github.event.inputs.PAT }}
+          PAT: ${{ github.event.inputs.${{ secrets.GITHUB_TOKEN }} }} 
