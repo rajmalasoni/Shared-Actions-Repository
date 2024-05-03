@@ -25,7 +25,7 @@ jobs:
 
       - name: Set up Git and create tag
         run: |
-          git config --global user.email "actions@example.com"
+          git config --global user.email "rajvmalasoni@gmail.com"
           git config --global user.name "GitHub Actions"
           echo "VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}"
           git tag -a ${{ github.event.inputs.VERSION_FILE }} -m "Version ${{ github.event.inputs.VERSION_FILE }}"
