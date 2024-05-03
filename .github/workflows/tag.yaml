@@ -29,13 +29,16 @@ jobs:
         with:
           repository: ${{ github.event.inputs.REPO_OWNER }}/${{ github.event.inputs.REPO_NAME }}
           ref: master # or specify the branch you want to use
+          token: ${{ github.event.inputs.GITHUB_TOKEN }}
         
       - name: Read version from file
         id: version
         run: echo "VERSION=$(cat ${{ github.event.inputs.VERSION_FILE }})" >> $GITHUB_ENV
       - name: Create tag
         run: |
-          git tag -a $VERSION -m "'Version'  $VERSION"
+          git config --global user.email "rajvmalasoni@gmail.com"
+          git config --global user.name "GitHub Actions"
+          git tag -a $VERSION -m "Version $VERSION"
           echo "Created tag: $VERSION"
         
       - name: Push tag
