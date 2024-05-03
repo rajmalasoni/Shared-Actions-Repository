@@ -29,7 +29,7 @@ jobs:
         with:
           repository: ${{ github.event.inputs.REPO_OWNER }}/${{ github.event.inputs.REPO_NAME }}
           ref: master # or specify the branch you want to use
-          token: ${{ github.event.inputs.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Read version from file
         id: version
