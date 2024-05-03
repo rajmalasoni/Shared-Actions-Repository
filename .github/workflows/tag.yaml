@@ -37,6 +37,6 @@ jobs:
           git config --global user.name "GitHub Actions"
           echo "VERSION_FILE: ${{ github.event.inputs.VERSION_FILE }}"
           git tag -a ${{ github.event.inputs.VERSION_FILE }} -m "Version ${{ github.event.inputs.VERSION_FILE }}"
-          git push https://${{ github.event.inputs.UserName }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.inputs.Owner }}/${{ github.event.inputs.REPO_NAME }}.git --tags
+          git push https://${{ github.event.inputs.UserName }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.inputs.Owner }}/${{ github.event.inputs.REPO_NAME }}.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
