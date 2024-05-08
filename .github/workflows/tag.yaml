@@ -1,52 +1,41 @@
 #  Description: This workflow is tigger on close event   to check for stale pull requests and close them after two days of inactivity.
+name: Create Tag on Merge to master
+
 on:
-  workflow_dispatch:
-    inputs:
-      GITHUB_TOKEN:
-        description: 'GitHub token for authentication.'
-        required: true
-        type: string
-      VERSION_FILE:
-        description: 'VERSION_FILE.'
-        required: true
-        type: string
-      REPO_NAME:
-        description: 'REPO_NAME.'
-        required: true
-        type: string
-      REPO_OWNER:
-        description: 'Owner of the source repository.'
-        required: true
-        type: string
-        
-        
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+
 jobs:
   create-tag:
     runs-on: ubuntu-latest
+
+    env:
+      CREATE_TAG: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.base.ref == 'master' }}
+
     steps:
-      - name: Checkout source code
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: Clean up existing files
+
+      - name: Set up Git
         run: |
-           ls -a | grep -vE "^\.$|^\.\.$" | xargs rm -rf
-      - name: clone repo
-        run: |
-          git clone https://github.com/${{ github.event.inputs.REPO_OWNER }}/${{ github.event.inputs.REPO_NAME }}.git
-          git checkout master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+          git config --global user.email "actions@example.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Read version from file
         id: version
-        run: echo "VERSION=$(cat ${{ github.event.inputs.VERSION_FILE }})" >> $GITHUB_ENV
+        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+      
       - name: Create tag
         run: |
-          git config --global user.email "rajvmalasoni@gmail.com"
-          git config --global user.name "GitHub Actions"
           git tag -a $VERSION -m "Version $VERSION"
           echo "Created tag: $VERSION"
-        
+        if: ${{ env.CREATE_TAG }}
+      
       - name: Push tag
-        run: git push origin $VERSION
+        run: git push origin $VERSION --tags
+        if: ${{ env.CREATE_TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
